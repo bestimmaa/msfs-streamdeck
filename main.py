@@ -10,7 +10,7 @@
 # Example script showing basic library usage - updating key images with new
 # tiles generated at runtime, and responding to button state change events.
 
-# TODO:
+# https://docs.microsoft.com/en-us/previous-versions/microsoft-esp/cc526980(v=msdn.10)
 
 
 import os
@@ -33,10 +33,16 @@ ae = AircraftEvents(sm)
 # Folder location of image assets used by this example.
 ASSETS_PATH = os.path.join(os.getcwd(), "Assets")
 
-# A mapping from identifiers to a button position - the id are equal to the SimConnect Variable name that is rendered per button.
+# A mapping from  SimConnect variable identifiers to a button position - Where to put what kind of button. 
+# Each variable is represented by exactly one button. Buttons might display additional information and can trigger SimConnect events if needed.
+# This might lack flexibility to handle cases like a warning light that displays a combination of different warnings.
 # Keep in mind that the events have usually different identifiers.
-# TODO: Add the following variables / events
-# KEY_LANDING_LIGHTS_TOGGLE	LANDING_LIGHTS_TOGGLE	Toggle landing lights
+#
+# You can find most SimConnect variables here:
+# https://docs.microsoft.com/en-us/previous-versions/microsoft-esp/cc526981(v=msdn.10)
+# and the SimConnect events here:
+# https://docs.microsoft.com/en-us/previous-versions/microsoft-esp/cc526980(v=msdn.10)
+
 
 key_index = {
     "AUTOPILOT_MASTER" : 0,
