@@ -10,6 +10,8 @@ This python app is basically an extended version of python-elgato-streamdeck sam
 ## Dependencies
 
 [python-elgato-streamdeck](https://github.com/abcminiuser/python-elgato-streamdeck) 
+[Python-SimConnect](https://github.com/odwdinc/Python-SimConnect)
 
-[Python-SimConnect](https://github.com/odwdinc/Python-SimConnect)
-[Python-SimConnect](https://github.com/odwdinc/Python-SimConnect)
+## Run
+
+    python main.py
