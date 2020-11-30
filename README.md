@@ -3,7 +3,7 @@ A python application to turn the Elgato Stream Deck into a Flight Simulator inte
 
 ![Stream Deck with AP controls](IMG_2775.png)
 
-This python app is basically an extended version of python-elgato-streamdeck sample. It includes a variety of buttons that interact with and display information from the auto pilot using SimConnect. It also includes icons for different AP functions and other information. The icons are created from the excellent template provided by https://fsresources.weebly.com/stream-deck-templates.html
+This python app is basically an extended version of python-elgato-streamdeck sample. It includes a variety of buttons that interact with and display information from the auto pilot using SimConnect. It also includes icons for different AP functions and other information. The icons are created from the excellent template provided by [u/clorix](https://fsresources.weebly.com/stream-deck-templates.html)
 
 ## Dependencies
 
