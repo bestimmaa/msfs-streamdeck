@@ -83,8 +83,8 @@ def get_key_style_toggle(variable, name):
         label = ""
         return {
             "name": name,
-            "icon": os.path.join(ASSETS_PATH, icon),
-            "font": os.path.join(ASSETS_PATH, font),
+            "icon": os.path.join(os.path.join(ASSETS_PATH, "Icons"), icon),
+            "font": os.path.join(os.path.join(ASSETS_PATH, "Fonts\\Roboto"), font),
             "label": label
         }
 
@@ -168,8 +168,8 @@ def get_key_style(deck, key, state):
         label = ""
     return {
         "name": name,
-        "icon": os.path.join(ASSETS_PATH, icon),
-        "font": os.path.join(ASSETS_PATH, font),
+        "icon": os.path.join(os.path.join(ASSETS_PATH, "Icons"), icon),
+        "font": os.path.join(os.path.join(ASSETS_PATH, "Fonts\\Roboto"), font),
         "label": label
     }
 
