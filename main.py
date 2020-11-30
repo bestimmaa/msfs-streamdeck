@@ -10,6 +10,9 @@
 # Example script showing basic library usage - updating key images with new
 # tiles generated at runtime, and responding to button state change events.
 
+# TODO:
+
+
 import os
 import threading
 
@@ -155,6 +158,9 @@ def get_key_style(deck, key, state):
 
     elif key ==  key_index["AUTOPILOT_APPROACH_HOLD"]:
         return get_key_style_toggle("AUTOPILOT_APPROACH_HOLD","APPR")
+
+    elif key ==  key_index["LIGHT_LANDING"]:
+        return get_key_style_toggle("LIGHT_LANDING","Land")
         
     else:
         name = "EMPTY"
@@ -226,7 +232,11 @@ def key_change_callback(deck, key, state):
             event_to_trigger()
         if key == key_index["AUTOPILOT_YAW_DAMPER"]:
             event_to_trigger = ae.find("YAW_DAMPER_TOGGLE")  # Toggle YD 
-            event_to_trigger()        
+            event_to_trigger()
+        if key == key_index["LIGHT_LANDING"]:
+            event_to_trigger = ae.find("LANDING_LIGHTS_TOGGLE")  # Toggle landing lights
+            event_to_trigger()
+                    
         
         # When an exit button is pressed, close the application.
         if key_style["name"] == "exit":
@@ -235,7 +245,6 @@ def key_change_callback(deck, key, state):
             with deck:
                 # Reset deck, clearing all button images.
                 deck.reset()
-
                 # Close deck handle, terminating internal worker threads.
                 deck.close()
 
