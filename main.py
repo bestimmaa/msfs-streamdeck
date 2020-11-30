@@ -92,11 +92,12 @@ def get_key_style_toggle(variable, name):
 def get_key_style(deck, key, state):
     # Last button in the example application is the exit button.
     exit_key_index = deck.key_count() - 1
+    # Default font to be overriden if needed
+    font = "Roboto-Regular.ttf"
 
     if key == exit_key_index:
         name = "exit"
         icon = "{}.png".format("Exit")
-        font = "Roboto-Regular.ttf"
         label = "Bye" if state else "Exit"
     elif key ==  key_index["AUTOPILOT_MASTER"]:
         return get_key_style_toggle("AUTOPILOT_MASTER","AP")
@@ -111,7 +112,6 @@ def get_key_style(deck, key, state):
         label = " " if vs > -5.0 and vs < 5.0 else "{:.0f} ft/min".format(vs)
         name = "VS"
         icon = "VS_off.png" if activated else "VS_on.png" 
-        font = "Roboto-Regular.ttf"
     
     elif key ==  key_index["AUTOPILOT_HEADING_LOCK"]:
         activated = 0.0 if aq.get("AUTOPILOT_HEADING_LOCK") == None else aq.get("AUTOPILOT_HEADING_LOCK")
@@ -120,7 +120,6 @@ def get_key_style(deck, key, state):
         label = "{:.0f}°".format(hdg)
         name = "HDG"
         icon = "HDG_off.png" if activated else "HDG_on.png" 
-        font = "Roboto-Regular.ttf"
 
     elif key ==  key_index["AUTOPILOT_ALTITUDE_LOCK"]:
         activated = 0.0 if aq.get("AUTOPILOT_ALTITUDE_LOCK") == None else aq.get("AUTOPILOT_ALTITUDE_LOCK")
@@ -129,7 +128,6 @@ def get_key_style(deck, key, state):
         label = "{:.0f}ft".format(alt)
         name = "ALT"
         icon = "ALT_off.png" if activated else "ALT_on.png" 
-        font = "Roboto-Regular.ttf"        
 
     elif key ==  key_index["AUTOPILOT_NAV1_LOCK"]:
         return get_key_style_toggle("AUTOPILOT_NAV1_LOCK","NAV")
@@ -139,7 +137,6 @@ def get_key_style(deck, key, state):
         display = "{:.0f}:{:02.0f}".format(ete/60,ete%60) if ete != None else "OFF"
         name = "ETE"
         icon = "ETE.png"
-        font = "Roboto-Regular.ttf"
         label = display if state else display
 
     elif key == key_index["NAV_ACTIVE_FREQUENCY:1"]:
@@ -147,7 +144,6 @@ def get_key_style(deck, key, state):
         display = "{:02.2f}".format(freq) if freq != None else "OFF"
         name = "NAV1"
         icon = "NAV1.png"
-        font = "Roboto-Regular.ttf"
         label = display if state else display
 
     elif key == key_index["COM_ACTIVE_FREQUENCY:1"]:
@@ -155,7 +151,6 @@ def get_key_style(deck, key, state):
         display = "{:02.2f}".format(freq) if freq != None else "OFF"
         name = "COM1"
         icon = "COM.png"
-        font = "Roboto-Regular.ttf"
         label = display if state else display    
 
     elif key ==  key_index["AUTOPILOT_APPROACH_HOLD"]:
@@ -164,7 +159,6 @@ def get_key_style(deck, key, state):
     else:
         name = "EMPTY"
         icon = "{}.png".format("Pressed" if state else "Released")
-        font = "Roboto-Regular.ttf"
         label = ""
     return {
         "name": name,
@@ -208,9 +202,9 @@ def key_change_callback(deck, key, state):
         key_style = get_key_style(deck, key, state)
         if key ==  key_index["AUTOPILOT_MASTER"]:
             event_to_trigger = ae.find("AP_MASTER")  # Toggles autopilot on or off
-            event_to_trigger()
+            event_to_trigger()    
         if key == key_index["AUTOPILOT_VERTICAL_HOLD"]:
-            event_to_trigger = ae.find("")  # Toggles VS mode
+            event_to_trigger = ae.find("AP_VS_HOLD")  # Toggles VS mode
             event_to_trigger()
         if key == key_index["AUTOPILOT_HEADING_LOCK"]:
             event_to_trigger = ae.find("AP_HDG_HOLD_ON")  # Toggles HDG mode
@@ -219,10 +213,10 @@ def key_change_callback(deck, key, state):
             event_to_trigger = ae.find("AP_PANEL_ALTITUDE_HOLD")  # Toggles ALT mode
             event_to_trigger() 
         if key == key_index["AUTOPILOT_NAV1_LOCK"]:
-            event_to_trigger = ae.find("AP_NAV1_HOLD_ON")  # Toggles ALT mode
+            event_to_trigger = ae.find("AP_NAV1_HOLD_ON")  # Toggles NAV mode
             event_to_trigger()   
         if key == key_index["AUTOPILOT_APPROACH_HOLD"]:
-            event_to_trigger = ae.find("AP_APR_HOLD")  # Toggles ALT mode
+            event_to_trigger = ae.find("AP_APR_HOLD")  # Toggles APPR mode
             event_to_trigger()   
         if key == key_index["NAV_ACTIVE_FREQUENCY:1"]:
             event_to_trigger = ae.find("NAV1_RADIO_SWAP")  # Swap NAV1 standby / active frequency
@@ -231,7 +225,7 @@ def key_change_callback(deck, key, state):
             event_to_trigger = ae.find("COM_STBY_RADIO_SWAP")  # Swap COM1 standby / active frequency
             event_to_trigger()
         if key == key_index["AUTOPILOT_YAW_DAMPER"]:
-            event_to_trigger = ae.find("YAW_DAMPER_TOGGLE")  # Swap COM1 standby / active frequency
+            event_to_trigger = ae.find("YAW_DAMPER_TOGGLE")  # Toggle YD 
             event_to_trigger()        
         
         # When an exit button is pressed, close the application.
